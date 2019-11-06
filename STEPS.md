@@ -1,6 +1,6 @@
 1. Add (u, v, h, r, t) for fead_dict
 ```
-original results:
+Movie original results:
 epoch 0    train auc: 0.8892  acc: 0.8023    eval auc: 0.8837  acc: 0.8001    test auc: 0.8840  acc: 0.8007
 epoch 1    train auc: 0.8958  acc: 0.8116    eval auc: 0.8862  acc: 0.8052    test auc: 0.8868  acc: 0.8057
 epoch 2    train auc: 0.9027  acc: 0.8171    eval auc: 0.8884  acc: 0.8077    test auc: 0.8888  acc: 0.8075
@@ -22,7 +22,17 @@ epoch 17    train auc: 0.9385  acc: 0.8613    eval auc: 0.9126  acc: 0.8373    t
 epoch 18    train auc: 0.9386  acc: 0.8609    eval auc: 0.9122  acc: 0.8368    test auc: 0.9124  acc: 0.8369
 epoch 19    train auc: 0.9389  acc: 0.8617    eval auc: 0.9128  acc: 0.8372    test auc: 0.9128  acc: 0.8373
 
-new results:
+Book original results:
+epoch 0    train auc: 0.8147  acc: 0.6197    eval auc: 0.7052  acc: 0.6165    test auc: 0.7078  acc: 0.6099
+epoch 1    train auc: 0.8373  acc: 0.6958    eval auc: 0.7164  acc: 0.6759    test auc: 0.7180  acc: 0.6699
+epoch 2    train auc: 0.8540  acc: 0.7271    eval auc: 0.7280  acc: 0.6978    test auc: 0.7281  acc: 0.6934
+epoch 3    train auc: 0.8629  acc: 0.7418    eval auc: 0.7320  acc: 0.7041    test auc: 0.7318  acc: 0.7002
+epoch 4    train auc: 0.8698  acc: 0.7523    eval auc: 0.7339  acc: 0.7077    test auc: 0.7337  acc: 0.7036
+epoch 5    train auc: 0.8760  acc: 0.7543    eval auc: 0.7334  acc: 0.7076    test auc: 0.7334  acc: 0.7040
+epoch 6    train auc: 0.8815  acc: 0.7589    eval auc: 0.7330  acc: 0.7055    test auc: 0.7332  acc: 0.7026
+epoch 7    train auc: 0.8865  acc: 0.7637    eval auc: 0.7317  acc: 0.7019    test auc: 0.7317  acc: 0.6988
+epoch 8    train auc: 0.8904  acc: 0.7767    eval auc: 0.7311  acc: 0.6950    test auc: 0.7308  acc: 0.6920
+epoch 9    train auc: 0.8937  acc: 0.7847    eval auc: 0.7304  acc: 0.6860    test auc: 0.7299  acc: 0.6843
 ```
 
 
