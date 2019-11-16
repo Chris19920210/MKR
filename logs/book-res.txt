@@ -1,28 +1,5 @@
-1. Add (u, v, h, r, t) for fead_dict
-```
-Movie original results:
-epoch 0    train auc: 0.8892  acc: 0.8023    eval auc: 0.8837  acc: 0.8001    test auc: 0.8840  acc: 0.8007
-epoch 1    train auc: 0.8958  acc: 0.8116    eval auc: 0.8862  acc: 0.8052    test auc: 0.8868  acc: 0.8057
-epoch 2    train auc: 0.9027  acc: 0.8171    eval auc: 0.8884  acc: 0.8077    test auc: 0.8888  acc: 0.8075
-epoch 3    train auc: 0.9122  acc: 0.8266    eval auc: 0.8937  acc: 0.8114    test auc: 0.8932  acc: 0.8118
-epoch 4    train auc: 0.9200  acc: 0.8375    eval auc: 0.8988  acc: 0.8206    test auc: 0.8985  acc: 0.8192
-epoch 5    train auc: 0.9254  acc: 0.8444    eval auc: 0.9034  acc: 0.8261    test auc: 0.9033  acc: 0.8249
-epoch 6    train auc: 0.9289  acc: 0.8495    eval auc: 0.9062  acc: 0.8296    test auc: 0.9061  acc: 0.8284
-epoch 7    train auc: 0.9314  acc: 0.8521    eval auc: 0.9081  acc: 0.8319    test auc: 0.9082  acc: 0.8308
-epoch 8    train auc: 0.9328  acc: 0.8539    eval auc: 0.9095  acc: 0.8333    test auc: 0.9097  acc: 0.8328
-epoch 9    train auc: 0.9344  acc: 0.8559    eval auc: 0.9102  acc: 0.8343    test auc: 0.9102  acc: 0.8338
-epoch 10    train auc: 0.9355  acc: 0.8578    eval auc: 0.9112  acc: 0.8357    test auc: 0.9111  acc: 0.8350
-epoch 11    train auc: 0.9360  acc: 0.8580    eval auc: 0.9119  acc: 0.8356    test auc: 0.9117  acc: 0.8352
-epoch 12    train auc: 0.9369  acc: 0.8597    eval auc: 0.9113  acc: 0.8365    test auc: 0.9115  acc: 0.8354
-epoch 13    train auc: 0.9372  acc: 0.8594    eval auc: 0.9120  acc: 0.8361    test auc: 0.9116  acc: 0.8348
-epoch 14    train auc: 0.9377  acc: 0.8596    eval auc: 0.9122  acc: 0.8366    test auc: 0.9119  acc: 0.8357
-epoch 15    train auc: 0.9377  acc: 0.8603    eval auc: 0.9121  acc: 0.8368    test auc: 0.9117  acc: 0.8362
-epoch 16    train auc: 0.9376  acc: 0.8599    eval auc: 0.9126  acc: 0.8376    test auc: 0.9124  acc: 0.8364
-epoch 17    train auc: 0.9385  acc: 0.8613    eval auc: 0.9126  acc: 0.8373    test auc: 0.9123  acc: 0.8359
-epoch 18    train auc: 0.9386  acc: 0.8609    eval auc: 0.9122  acc: 0.8368    test auc: 0.9124  acc: 0.8369
-epoch 19    train auc: 0.9389  acc: 0.8617    eval auc: 0.9128  acc: 0.8372    test auc: 0.9128  acc: 0.8373
-
-Book original results:
+=================
+MKR-8   test auc: 0.7339  acc: 0.7052
 epoch 0    train auc: 0.8174  acc: 0.6157    eval auc: 0.7042  acc: 0.6120    test auc: 0.7064  acc: 0.6074
 epoch 1    train auc: 0.8375  acc: 0.6907    eval auc: 0.7153  acc: 0.6723    test auc: 0.7166  acc: 0.6673
 epoch 2    train auc: 0.8543  acc: 0.7256    eval auc: 0.7269  acc: 0.6972    test auc: 0.7274  acc: 0.6927
@@ -44,7 +21,32 @@ epoch 17    train auc: 0.9065  acc: 0.7962    eval auc: 0.7254  acc: 0.6678    t
 epoch 18    train auc: 0.9080  acc: 0.7989    eval auc: 0.7240  acc: 0.6634    test auc: 0.7230  acc: 0.6665
 epoch 19    train auc: 0.9096  acc: 0.8029    eval auc: 0.7229  acc: 0.6593    test auc: 0.7221  acc: 0.6629
 
-Book CycleGAN results:
+MKR-64  auc: 0.7303  acc: 0.7009
+epoch 0    train auc: 0.7820  acc: 0.5847    eval auc: 0.7044  acc: 0.5845    test auc: 0.7023  acc: 0.5789
+epoch 1    train auc: 0.8356  acc: 0.5926    eval auc: 0.7238  acc: 0.5928    test auc: 0.7242  acc: 0.5864
+epoch 2    train auc: 0.8408  acc: 0.6073    eval auc: 0.7189  acc: 0.6055    test auc: 0.7202  acc: 0.5992
+epoch 3    train auc: 0.8341  acc: 0.6199    eval auc: 0.7080  acc: 0.6155    test auc: 0.7104  acc: 0.6089
+epoch 4    train auc: 0.8314  acc: 0.6441    eval auc: 0.7040  acc: 0.6362    test auc: 0.7067  acc: 0.6294
+epoch 5    train auc: 0.8294  acc: 0.6613    eval auc: 0.7021  acc: 0.6510    test auc: 0.7049  acc: 0.6439
+epoch 6    train auc: 0.8325  acc: 0.6790    eval auc: 0.7048  acc: 0.6638    test auc: 0.7074  acc: 0.6586
+epoch 7    train auc: 0.8388  acc: 0.6962    eval auc: 0.7101  acc: 0.6742    test auc: 0.7123  acc: 0.6706
+epoch 8    train auc: 0.8442  acc: 0.7068    eval auc: 0.7141  acc: 0.6824    test auc: 0.7161  acc: 0.6782
+epoch 9    train auc: 0.8495  acc: 0.7160    eval auc: 0.7176  acc: 0.6896    test auc: 0.7195  acc: 0.6857
+epoch 10    train auc: 0.8547  acc: 0.7254    eval auc: 0.7211  acc: 0.6967    test auc: 0.7229  acc: 0.6932
+epoch 11    train auc: 0.8593  acc: 0.7325    eval auc: 0.7241  acc: 0.6995    test auc: 0.7256  acc: 0.6971
+epoch 12    train auc: 0.8633  acc: 0.7390    eval auc: 0.7266  acc: 0.7021    test auc: 0.7278  acc: 0.7001
+epoch 13    train auc: 0.8667  acc: 0.7442    eval auc: 0.7281  acc: 0.7036    test auc: 0.7292  acc: 0.7007
+epoch 14    train auc: 0.8693  acc: 0.7472    eval auc: 0.7286  acc: 0.7039    test auc: 0.7296  acc: 0.7004
+epoch 15    train auc: 0.8721  acc: 0.7512    eval auc: 0.7294  acc: 0.7066    test auc: 0.7303  acc: 0.7009
+epoch 16    train auc: 0.8745  acc: 0.7539    eval auc: 0.7296  acc: 0.7059    test auc: 0.7304  acc: 0.7009
+epoch 17    train auc: 0.8769  acc: 0.7576    eval auc: 0.7300  acc: 0.7059    test auc: 0.7308  acc: 0.7009
+epoch 18    train auc: 0.8791  acc: 0.7623    eval auc: 0.7303  acc: 0.7040    test auc: 0.7310  acc: 0.6988
+epoch 19    train auc: 0.8812  acc: 0.7668    eval auc: 0.7299  acc: 0.7003    test auc: 0.7306  acc: 0.6952
+epoch 20    train auc: 0.8831  acc: 0.7719    eval auc: 0.7293  acc: 0.6965    test auc: 0.7299  acc: 0.6908
+epoch 21    train auc: 0.8850  acc: 0.7774    eval auc: 0.7292  acc: 0.6907    test auc: 0.7296  acc: 0.6851
+epoch 22    train auc: 0.8867  acc: 0.7817    eval auc: 0.7288  acc: 0.6842    test auc: 0.7290  acc: 0.6797
+
+NKR-CycleGAN    auc: 0.7440  acc: 0.7116
 epoch 0    train auc: 0.5340  acc: 0.5124    eval auc: 0.5241  acc: 0.5088    test auc: 0.5232  acc: 0.5094
 epoch 1    train auc: 0.6095  acc: 0.5425    eval auc: 0.5929  acc: 0.5403    test auc: 0.5911  acc: 0.5352
 epoch 2    train auc: 0.6687  acc: 0.5903    eval auc: 0.6547  acc: 0.5872    test auc: 0.6523  acc: 0.5852
@@ -77,9 +79,4 @@ epoch 28    train auc: 0.8688  acc: 0.7679    eval auc: 0.7426  acc: 0.7101    t
 epoch 29    train auc: 0.8698  acc: 0.7690    eval auc: 0.7422  acc: 0.7082    test auc: 0.7418  acc: 0.7068
 epoch 30    train auc: 0.8707  acc: 0.7704    eval auc: 0.7419  acc: 0.7066    test auc: 0.7414  acc: 0.7057
 epoch 31    train auc: 0.8716  acc: 0.7716    eval auc: 0.7415  acc: 0.7044    test auc: 0.7411  acc: 0.7036
-```
-
-
-2. Replace CrossCompress op with CycleGAN
-3. Apply different type of KGE
-4. Apply this model on other kinds of side information like social networks
+===================

@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from sklearn.metrics import roc_auc_score
-from layers import Dense, CrossCompressUnit
+from layers import Dense, CrossCompressUnit, CycleGANUnit
 
 
 class MKR(object):
@@ -47,18 +47,26 @@ class MKR(object):
         self.relation_embeddings = tf.nn.embedding_lookup(self.relation_emb_matrix, self.relation_indices)
         self.tail_embeddings = tf.nn.embedding_lookup(self.entity_emb_matrix, self.tail_indices)
 
+        self.reals, self.fakes, self.units = [], [], []
+
         for _ in range(args.L):
             user_mlp = Dense(input_dim=args.dim, output_dim=args.dim)
             tail_mlp = Dense(input_dim=args.dim, output_dim=args.dim)
-            cc_unit = CrossCompressUnit(args.dim)
+            # cc_unit = CrossCompressUnit(args.dim)
+            cg_unit = CycleGANUnit(args.dim)
             self.user_embeddings = user_mlp(self.user_embeddings)
-            self.item_embeddings, self.head_embeddings = cc_unit([self.item_embeddings, self.head_embeddings])
+            input_v, input_e = self.item_embeddings, self.head_embeddings
+            self.item_embeddings, self.head_embeddings, fake_v, fake_e = cg_unit([input_v, input_e])
             self.tail_embeddings = tail_mlp(self.tail_embeddings)
 
             self.vars_rs.extend(user_mlp.vars)
-            self.vars_rs.extend(cc_unit.vars)
+            self.vars_rs.extend(cg_unit.vars)
             self.vars_kge.extend(tail_mlp.vars)
-            self.vars_kge.extend(cc_unit.vars)
+            self.vars_kge.extend(cg_unit.vars)
+
+            self.reals.append([input_v, input_e])
+            self.fakes.append([fake_v, fake_e])
+            self.units.append(cg_unit)
 
     def _build_high_layers(self, args):
         # RS
@@ -107,14 +115,20 @@ class MKR(object):
         self.l2_loss_rs = tf.nn.l2_loss(self.user_embeddings) + tf.nn.l2_loss(self.item_embeddings)
         for var in self.vars_rs:
             self.l2_loss_rs += tf.nn.l2_loss(var)
-        self.loss_rs = self.base_loss_rs + self.l2_loss_rs * args.l2_weight
+        self.cg_loss_rs = self.units[0].get_rs_loss(self.reals[0], self.fakes[0])
+        for inputs, fakes, cg_unit in zip(self.reals[1:], self.fakes[1:], self.units[1:]):
+            self.cg_loss_rs += cg_unit.get_rs_loss(inputs, fakes)
+        self.loss_rs = self.base_loss_rs + self.cg_loss_rs * args.cg_weight + self.l2_loss_rs * args.l2_weight
 
         # KGE
         self.base_loss_kge = -self.scores_kge
         self.l2_loss_kge = tf.nn.l2_loss(self.head_embeddings) + tf.nn.l2_loss(self.tail_embeddings)
         for var in self.vars_kge:
             self.l2_loss_kge += tf.nn.l2_loss(var)
-        self.loss_kge = self.base_loss_kge + self.l2_loss_kge * args.l2_weight
+        self.cg_loss_kge = self.units[0].get_kg_loss(self.reals[0], self.fakes[0])
+        for inputs, fakes, cg_unit in zip(self.reals[1:], self.fakes[1:], self.units[1:]):
+            self.cg_loss_kge += cg_unit.get_kg_loss(inputs, fakes)
+        self.loss_kge = self.base_loss_kge + self.cg_loss_kge * args.cg_weight + self.l2_loss_kge * args.l2_weight
 
     def _build_train(self, args):
         self.optimizer_rs = tf.train.AdamOptimizer(args.lr_rs).minimize(self.loss_rs)

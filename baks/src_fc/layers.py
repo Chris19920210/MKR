@@ -48,27 +48,50 @@ class Dense(Layer):
         return self.act(output)
 
 
-# use k-layer dense network as generator
-class Generator(Layer):
-    def __init__(self, input_dim, output_dim, num_layers, dropout=0.0, act=tf.nn.relu, name=None):
-        super(Generator, self).__init__(name)
-        self.input_dim = input_dim
-        self.output_dim = output_dim
-        self.dropout = dropout
-        self.act = act
-        self.num_layers = num_layers
-        self.layers = []
-        for i in range(num_layers):
-            dense_name = self.name + "_gen_dense" + str(i) if name is not None else "gen_dense" + str(i)
-            dim_out = input_dim if i < num_layers - 1 else output_dim
-            dense = Dense(input_dim, dim_out, dropout=dropout, act=act, name=dense_name)
-            self.layers.append(dense)
+class FCGUnit(Layer):
+    def __init__(self, dim, name=None):
+        super(FCGUnit, self).__init__(name)
+        self.dim = dim
+        with tf.variable_scope(self.name):
+            self.pweight_v = tf.get_variable(name='pweight_v', shape=(dim, dim), dtype=tf.float32)
+            self.pweight_e = tf.get_variable(name='pweight_e', shape=(dim, dim), dtype=tf.float32)
+            self.weight_e = tf.get_variable(name='weight_e', shape=(2 * dim, dim), dtype=tf.float32)
+            self.weight_v = tf.get_variable(name='weight_v', shape=(2 * dim, dim), dtype=tf.float32)
+            self.pbias_v = tf.get_variable(name='pbias_v', shape=dim, initializer=tf.zeros_initializer())
+            self.pbias_e = tf.get_variable(name='pbias_e', shape=dim, initializer=tf.zeros_initializer())
+            self.bias_v = tf.get_variable(name='bias_v', shape=dim, initializer=tf.zeros_initializer())
+            self.bias_e = tf.get_variable(name='bias_e', shape=dim, initializer=tf.zeros_initializer())
+        self.vars = [self.weight_v, self.weight_e, self.pweight_v, self.pweight_e]
 
     def _call(self, inputs):
-        output = inputs
-        for dense in self.layers:
-            output = dense(output)
-        return output
+        # [batch_size, dim]
+        v, e = inputs
+        fv = tf.nn.relu(tf.matmul(e, self.pweight_e) + self.pbias_e)
+        fe = tf.nn.relu(tf.matmul(v, self.pweight_v) + self.pbias_v)
+        inpv = tf.concat([v, fv], 1)
+        inpe = tf.concat([e, fe], 1)
+        v_output = tf.nn.relu(tf.matmul(inpv, self.weight_v) + self.bias_v)
+        e_output = tf.nn.relu(tf.matmul(inpe, self.weight_e) + self.bias_e)
+        return v_output, e_output
+
+
+class FCUnit(Layer):
+    def __init__(self, dim, name=None):
+        super(FCUnit, self).__init__(name)
+        self.dim = dim
+        with tf.variable_scope(self.name):
+            self.weight_v = tf.get_variable(name='weight_v', shape=(2 * dim, dim), dtype=tf.float32)
+            self.weight_e = tf.get_variable(name='weight_e', shape=(2 * dim, dim), dtype=tf.float32)
+            self.bias_v = tf.get_variable(name='bias_v', shape=dim, initializer=tf.zeros_initializer())
+            self.bias_e = tf.get_variable(name='bias_e', shape=dim, initializer=tf.zeros_initializer())
+        self.vars = [self.weight_v, self.weight_e]
+
+    def _call(self, inputs):
+        # [batch_size, dim]
+        inp = tf.concat(inputs, 1)
+        v_output = tf.nn.relu(tf.matmul(inp, self.weight_v) + self.bias_v)
+        e_output = tf.nn.relu(tf.matmul(inp, self.weight_e) + self.bias_e)
+        return v_output, e_output
 
 
 class CrossCompressUnit(Layer):
