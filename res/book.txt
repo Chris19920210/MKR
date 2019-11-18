@@ -43,3 +43,18 @@ epoch 10    train auc: 0.8772  acc: 0.7621    eval auc: 0.7530  acc: 0.7141    t
 epoch 11    train auc: 0.8807  acc: 0.7632    eval auc: 0.7517  acc: 0.7127    test auc: 0.7514  acc: 0.7102
 epoch 12    train auc: 0.8839  acc: 0.7656    eval auc: 0.7502  acc: 0.7107    test auc: 0.7500  acc: 0.7086
 auc: 0.7546  acc: 0.7125
+
+Namespace(H=1, L=1, batch_size=32, cg_weight=1, dataset='book', dim=8, kge_interval=3, l2_weight=1e-06, lr_kge=1e-05, lr_rs=0.0001, n_epochs=50)
+CycleGAN-half
+epoch 0    train auc: 0.7075  acc: 0.6624    eval auc: 0.7152  acc: 0.6655    test auc: 0.7054  acc: 0.6585
+epoch 1    train auc: 0.7436  acc: 0.6791    eval auc: 0.7411  acc: 0.6718    test auc: 0.7339  acc: 0.6643
+epoch 2    train auc: 0.8008  acc: 0.7041    eval auc: 0.7475  acc: 0.6905    test auc: 0.7436  acc: 0.6842
+epoch 3    train auc: 0.8341  acc: 0.7212    eval auc: 0.7483  acc: 0.7009    test auc: 0.7466  acc: 0.6969
+epoch 4    train auc: 0.8488  acc: 0.7390    eval auc: 0.7497  acc: 0.7118    test auc: 0.7487  acc: 0.7073
+epoch 5    train auc: 0.8577  acc: 0.7503    eval auc: 0.7507  acc: 0.7152    test auc: 0.7500  acc: 0.7111
+epoch 6    train auc: 0.8638  acc: 0.7563    eval auc: 0.7510  acc: 0.7158    test auc: 0.7503  acc: 0.7131
+epoch 7    train auc: 0.8685  acc: 0.7618    eval auc: 0.7508  acc: 0.7140    test auc: 0.7504  acc: 0.7117
+epoch 8    train auc: 0.8725  acc: 0.7632    eval auc: 0.7504  acc: 0.7129    test auc: 0.7501  acc: 0.7108
+epoch 9    train auc: 0.8760  acc: 0.7654    eval auc: 0.7499  acc: 0.7112    test auc: 0.7496  acc: 0.7101
+epoch 10    train auc: 0.8791  acc: 0.7662    eval auc: 0.7491  acc: 0.7100    test auc: 0.7488  acc: 0.7083
+auc: 0.7503  acc: 0.7131
