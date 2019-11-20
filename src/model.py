@@ -128,8 +128,11 @@ class MKR(object):
         self.loss_kge = self.base_loss_kge + self.cg_loss_kge * args.cg_weight + self.l2_loss_kge * args.l2_weight
 
     def _build_train(self, args):
+        # TODO: better optimizer?
         self.optimizer_rs = tf.train.AdamOptimizer(args.lr_rs).minimize(self.loss_rs)
         self.optimizer_kge = tf.train.AdamOptimizer(args.lr_kge).minimize(self.loss_kge)
+        # self.optimizer_rs = tf.train.AdadeltaOptimizer(0.05).minimize(self.loss_rs)
+        # self.optimizer_kge = tf.train.AdadeltaOptimizer(0.05).minimize(self.loss_kge)
 
     def train_rs(self, sess, feed_dict):
         return sess.run([self.optimizer_rs, self.loss_rs], feed_dict)

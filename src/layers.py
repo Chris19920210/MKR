@@ -67,6 +67,7 @@ class CrossCompressUnit(Layer):
             self.dvb = tf.get_variable(name='discriminator_v_bias', shape=1, dtype=tf.float32)
             self.deb = tf.get_variable(name='discriminator_e_bias', shape=1, dtype=tf.float32)
         self.vars = [self.weight_v, self.weight_e, self.g, self.f, self.dv, self.de]
+        # self.vars = [self.g, self.f, self.dv, self.de]
 
     def _generator(self, inp, direction):
         weight = self.g if direction == 've' else self.f
@@ -77,6 +78,33 @@ class CrossCompressUnit(Layer):
         weight = self.dv if mode == 'v' else self.de
         bias = self.dvb if mode == 'v' else self.deb
         return tf.nn.sigmoid(tf.matmul(inp, weight) + bias)
+
+    '''
+    def _call(self, inputs):
+        # [batch_size, dim]
+        v, e = inputs
+
+        fv = self._generator(e, 'ev')
+        fe = self._generator(v, 've')
+        
+        cv = tf.concat([v, fv], 1)
+        ce = tf.concat([e, fe], 1)
+        xv1 = tf.expand_dims(cv, dim=2)
+        xe1 = tf.expand_dims(ce, dim=1)
+        xv2 = tf.expand_dims(cv, dim=1)
+        xe2 = tf.expand_dims(ce, dim=2)
+        m1 = tf.matmul(xv1, xe1)
+        m2 = tf.matmul(xe2, xv2)
+        print(">>>", cv.get_shape().as_list(), ce.get_shape().as_list(), 
+            xv1.get_shape().as_list(), xe1.get_shape().as_list(), 
+            xv2.get_shape().as_list(), xe2.get_shape().as_list(), 
+            m1.get_shape().as_list(), m2.get_shape().as_list())
+        
+        outputs = tf.reshape(tf.matmul(m1, xv1) + tf.matmul(m2, xe2), [-1, 2 * self.dim])
+        v_output, e_output = tf.split(outputs, 2, 1)
+
+        return v_output, e_output, fv, fe
+    '''
 
     def _call(self, inputs):
         # [batch_size, dim]

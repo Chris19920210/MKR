@@ -4,6 +4,7 @@ from model import MKR
 
 
 def train(args, data, show_loss, show_topk):
+    # tf.set_random_seed(0)
     n_user, n_item, n_entity, n_relation = data[0], data[1], data[2], data[3]
     train_data, eval_data, test_data = data[4], data[5], data[6]
     kg = data[7]
